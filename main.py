@@ -5,7 +5,7 @@ Description:
     This script is for the back end of the general project.
     Since the requirement is simple. I choose flask and mysql.
 """
-from flask import Flask
+from flask import jsonify, Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
 
@@ -20,9 +20,16 @@ class User(db.Model):
     # 定义列对象
     uid = db.Column(db.INT, primary_key=True)
     username = db.Column(db.VARCHAR(20))
+
     # repr()方法显示一个可读字符串，虽然不是完全必要，不过用于调试和测试还是很不错的。
     def __repr__(self):
         return '<User {}> '.format(self.uid)
+
+    def to_json(self):
+        return {
+            'UID': self.uid,
+            'Username': self.username
+        }
 
 
 @app.route('/')
@@ -30,11 +37,15 @@ def hello_world():
     return 'Hello Flask!'
 
 
-@app.route('/Users')
-def query_user():
-    a = User.query.all()
-    b = a[0].uid
-    return a
+@app.route('/user/', methods=['POST'])
+@app.route('/user/<int:uid>')
+def query_user(uid=None):
+    if request.method == "POST":
+        return "TODO"
+    m_user = User.query.filter_by(uid=uid).first()
+    if m_user is None:
+        return jsonify({'error': "User doesn't exist"}), "404 NOT FOUND"
+    return jsonify(m_user.to_json())
 
 
 @app.route('/addUsers')

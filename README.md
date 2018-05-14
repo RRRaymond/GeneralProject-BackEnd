@@ -22,7 +22,7 @@ Return son data about a single user.
 
   GET
 
-* URL Params
+* **URL Params**
 
   **Required:**
 
@@ -32,20 +32,20 @@ Return son data about a single user.
 
   `None`
 
-* Data Params
+* **Data Params**
 
   `None`
 
 * **Success Response:**
 
-  * Code: 200
+  * **Code:** 200
 
-    Content: 
+    **Content:** 
 
     ```json
     {
-        UID : 100000,
-        Username : "Raymond"
+        UID: 100000,
+        Username: "Raymond"
     }
     ```
 
@@ -59,7 +59,7 @@ Return son data about a single user.
 
     ```json
     {
-        error : "User doesn't exist"
+        error: "User doesn't exist"
     }
     ```
 
@@ -69,7 +69,7 @@ Return son data about a single user.
 
     ```json
     {
-        error : "You are unauthorized to make this request."
+        error: "You are unauthorized to make this request."
     }
     ```
 
@@ -77,7 +77,72 @@ Return son data about a single user.
 
   `None`
 
-**TODO**
+**Sign Up**
 
 ----
 
+Create a user.
+
+
+
+- **URL**
+
+  /users/
+
+- **Method**
+
+  Post
+
+- **URL Params**
+
+  **Required:**
+
+  `None`
+
+  **Optional:**
+
+  `None`
+
+- **Data Params**
+
+  `Username:[string]`
+
+- **Success Response:**
+
+  - **Code:** 200
+
+    **Content:** 
+
+    ```json
+    {
+        msg: "Sign up successfully."
+    }
+    ```
+
+    ​
+
+- **Error Response:**
+
+  - **Code:** 400 BAD REQUEST
+
+    **Content:**
+
+    ```json
+    {
+        error: "Parameters not found"
+    }
+    ```
+
+  - **Code:** 401 UNAUTHORIZED
+
+    **Content:**
+
+    ```json
+    {
+        error: "You are unauthorized to make this request."
+    }
+    ```
+
+- **Sameple Call**
+
+  `None`

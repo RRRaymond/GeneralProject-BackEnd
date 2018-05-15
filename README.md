@@ -16,7 +16,7 @@ Return son data about a single user.
 
 * **URL**
 
-  /users/:uid
+  /api//users/:uid
 
 * **Method**
 
@@ -77,6 +77,8 @@ Return son data about a single user.
 
   `None`
 
+
+
 **Sign Up**
 
 ----
@@ -87,7 +89,7 @@ Create a user.
 
 - **URL**
 
-  /users/
+  /api/users/
 
 - **Method**
 
@@ -146,3 +148,76 @@ Create a user.
 - **Sameple Call**
 
   `None`
+
+
+
+**Record Score**
+
+----
+
+To record score for a certain user and a certain game.
+
+
+
+- **URL**
+
+  /api/users/
+
+- **Method**
+
+  Post
+
+- **URL Params**
+
+  **Required:**
+
+  `None`
+
+  **Optional:**
+
+  `None`
+
+- **Data Params**
+
+  `UID:[INT]`
+
+- **Success Response:**
+
+  - **Code:** 200
+
+    **Content:** 
+
+    ```json
+    {
+        msg: "Record score successfully."
+    }
+    ```
+
+    ​
+
+- **Error Response:**
+
+  - **Code:** 400 BAD REQUEST
+
+    **Content:**
+
+    ```json
+    {
+        error: "Parameters not found"
+    }
+    ```
+
+  - **Code:** 401 UNAUTHORIZED
+
+    **Content:**
+
+    ```json
+    {
+        error: "You are unauthorized to make this request."
+    }
+    ```
+
+- **Sameple Call**
+
+  `None`
+

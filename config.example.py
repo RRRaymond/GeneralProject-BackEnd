@@ -5,6 +5,7 @@ Description:
     This is the example config file.
 """
 
+
 class Config(object):
     DEBUG = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True

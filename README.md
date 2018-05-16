@@ -12,11 +12,11 @@ Since the requirement is kind of simple. I choose **Flask** and **MySQL** to imp
 
 ----
 
-Return son data about a single user.
+Return son data about a single user and his scores for 3 games.
 
 * **URL**
 
-  /api//users/:uid
+  /api/user/
 
 * **Method**
 
@@ -26,7 +26,7 @@ Return son data about a single user.
 
   **Required:**
 
-  `uid=[integer]`
+  `None`
 
   **Optional:**
 
@@ -38,14 +38,19 @@ Return son data about a single user.
 
 * **Success Response:**
 
-  * **Code:** 200
+  * **Code:** 200 OK
 
     **Content:** 
 
     ```json
     {
-        UID: 100000,
-        Username: "Raymond"
+        "UID": 100000,
+        "Username": "Raymond"
+        "score": {
+            "Game1": 0,
+            "Game2": 0,
+            "Game3": 0
+        }
     }
     ```
 
@@ -59,7 +64,7 @@ Return son data about a single user.
 
     ```json
     {
-        error: "User doesn't exist"
+        "error": "User doesn't exist"
     }
     ```
 
@@ -69,7 +74,7 @@ Return son data about a single user.
 
     ```json
     {
-        error: "You are unauthorized to make this request."
+        "error": "You are unauthorized to make this request."
     }
     ```
 
@@ -89,7 +94,7 @@ Create a user.
 
 - **URL**
 
-  /api/users/
+  /api/user/
 
 - **Method**
 
@@ -111,13 +116,13 @@ Create a user.
 
 - **Success Response:**
 
-  - **Code:** 200
+  - **Code:** 200 OK
 
     **Content:** 
 
     ```json
     {
-        msg: "Sign up successfully."
+        "msg": "Sign up successfully."
     }
     ```
 
@@ -131,7 +136,7 @@ Create a user.
 
     ```json
     {
-        error: "Parameters not found"
+        "error": "Parameters not found"
     }
     ```
 
@@ -141,7 +146,7 @@ Create a user.
 
     ```json
     {
-        error: "You are unauthorized to make this request."
+        "error": "You are unauthorized to make this request."
     }
     ```
 
@@ -161,7 +166,7 @@ To record score for a certain user and a certain game.
 
 - **URL**
 
-  /api/users/
+  /api/score/
 
 - **Method**
 
@@ -179,17 +184,19 @@ To record score for a certain user and a certain game.
 
 - **Data Params**
 
-  `UID:[INT]`
+  `Score:[INT]`
+
+  `Game:[INT]`
 
 - **Success Response:**
 
-  - **Code:** 200
+  - **Code:** 200 OK
 
     **Content:** 
 
     ```json
     {
-        msg: "Record score successfully."
+        "msg": "Record score successfully."
     }
     ```
 
@@ -203,7 +210,7 @@ To record score for a certain user and a certain game.
 
     ```json
     {
-        error: "Parameters not found"
+        "error": "Parameters not found"
     }
     ```
 
@@ -213,7 +220,99 @@ To record score for a certain user and a certain game.
 
     ```json
     {
-        error: "You are unauthorized to make this request."
+        "error": "You are unauthorized to make this request."
+    }
+    ```
+
+- **Sameple Call**
+
+  `None`
+
+
+
+**Query for LeaderBoard**
+
+------
+
+To get the leaderboard for a certain game.
+
+
+
+- **URL**
+
+  /api/score/:game
+
+- **Method**
+
+  GET
+
+- **URL Params**
+
+  **Required:**
+
+  `game:[string]` 
+
+  *game must be one of 'game1', 'game2' or 'game3'*
+
+  **Optional:**
+
+  `None`
+
+- **Data Params**
+
+  `None`
+
+- **Success Response:**
+
+  - **Code:** 200 OK
+
+    **Content:** 
+
+    ```json
+    {
+      "Content": [
+        {
+          "Score": 15, 
+          "UID": 100015, 
+          "Username": "陈胖5"
+        }, 
+        {
+          "Score": 12, 
+          "UID": 100011, 
+          "Username": "陈钧涛陈胖2"
+        }, 
+        {
+          "Score": 4, 
+          "UID": 100013, 
+          "Username": "陈钧涛陈胖3"
+        }
+      ], 
+      "Count": 3, 
+      "Game": "game3"
+    }
+    ```
+
+    ​
+
+- **Error Response:**
+
+  - **Code:** 400 BAD REQUEST
+
+    **Content:**
+
+    ```json
+    {
+        "error": "Parameters not found"
+    }
+    ```
+
+  - **Code:** 401 UNAUTHORIZED
+
+    **Content:**
+
+    ```json
+    {
+        "error": "You are unauthorized to make this request."
     }
     ```
 
